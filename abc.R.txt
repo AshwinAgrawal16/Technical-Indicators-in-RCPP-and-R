@@ -1,0 +1,18 @@
+library(Rcpp)
+library(devtools)
+Sys.setenv("PKG_CXXFLAGS"="-fopenmp")
+Sys.setenv("PKG_LIBS"="-fopenmp")
+sourceCpp("twiggs.cpp")
+sourceCpp("PVT.cpp")
+xyz<-read.csv(file = "G:/yahoo.csv" , header=TRUE , sep=",")
+
+
+
+a=xyz$Close
+b=xyz$High
+d=xyz$Low
+e=xyz$Volume
+c1=twiggs(a,b,d,e)
+c2=PVT(a,e)
+plot(c1,type='l')
+plot(c2,type='l')
